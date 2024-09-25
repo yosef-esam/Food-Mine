@@ -1,17 +1,24 @@
-import { sample_food, sample_tags } from "../Data";
+import axios from "axios";
+export const getAll = async () => {
+  const { data } = await axios.get("/api/foods");
+  return data;
+};
 
-export const getAll = async () => sample_food;
-
-export const search = async (searchTerm) =>
-  sample_food.filter((item) =>
-    item.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-export const getAllTags = async () => sample_tags;
+export const search = async (searchTerm) => {
+  const { data } = await axios.get(`/api/foods/search/` + searchTerm);
+  return data;
+};
+export const getAllTags = async () => {
+  const { data } = await axios.get("/api/foods/tags");
+  return data;
+};
 export const getAllByTags = async (tag) => {
   if (tag == "All") return getAll();
-  return sample_food.filter((item) => item.tag.includes(tag));
+  const { data } = await axios.get(`/api/foods/tags/` + tag);
+  return data;
 };
 
 export const getById = async (foodid) => {
-  return sample_food.find((item) => item.id === parseInt(foodid)); // because id is a number
+  const { data } = await axios.get("/api/foods/" + foodid);
+  return data;
 };

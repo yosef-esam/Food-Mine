@@ -5,6 +5,7 @@ import App from "./App.jsx";
 import "./index.css";
 import { BrowserRouter } from "react-router-dom";
 import CartProvider from "./hooks/useCart.jsx";
+import "./axiosconfig.js";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>

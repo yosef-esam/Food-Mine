@@ -21,8 +21,6 @@ function FoodPage() {
     });
   }, [id]);
 
-  console.log(food);
-
   return (
     <>
       {!food ? (
