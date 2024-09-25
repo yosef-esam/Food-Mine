@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import Homepage from "./pages/Home/Homepage";
 import FoodPage from "./pages/Food/FoodPage";
 import CartPage from "./pages/Cart/CartPage";
+import Loginpage from "./pages/login/Loginpage";
 
 function AppRoute() {
   return (
@@ -12,6 +13,7 @@ function AppRoute() {
       <Route path="/tags/:Tag" element={<Homepage />} />
       <Route path="/food/:id" element={<FoodPage />} />
       <Route path="/cart" element={<CartPage />} />
+      <Route path="/login" element={<Loginpage />} />
     </Routes>
   );
 }

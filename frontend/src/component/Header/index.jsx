@@ -1,16 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useCart } from "../../hooks/useCart";
+import { useAuth } from "../../hooks/useAuth";
 
 function Header() {
-  const User = {
-    name: "John",
-  };
+  const { user, logout } = useAuth();
   const { cart } = useCart();
-  const Logout = () => {
-    // Log out logic goes here
-    console.log("User logged out");
-  };
+
   return (
     <div className=" font-quicksand border-b-2 border-[#e72929] flex justify-between ">
       <Link className=" font-bold p-[1rem]" to={"/"}>
@@ -18,22 +14,20 @@ function Header() {
       </Link>
       <nav className=" ">
         <ul className=" flex">
-          {User ? (
-            <li>
+          {user ? (
+            <li className="relative group">
               <Link
                 to={"/profile"}
                 id="dropdownHoverButton"
-                data-dropdown-toggle="dropdownHover"
-                data-dropdown-trigger="hover"
-                className=" hover:bg-[#e72929] hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-5 text-center inline-flex items-center "
+                className="hover:bg-[#e72929] hover:text-white  focus:outline-none font-medium rounded-lg text-sm px-5 py-5 text-center inline-flex items-center"
                 type="button"
               >
-                {User.name}
+                {user.name}
               </Link>
 
               <div
                 id="dropdownHover"
-                className="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700"
+                className="absolute hidden group-hover:block bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 z-10"
               >
                 <ul
                   className="py-2 text-sm text-gray-700 dark:text-gray-200"
@@ -41,10 +35,10 @@ function Header() {
                 >
                   <li>
                     <Link
-                      to="/proflie"
+                      to="/profile"
                       className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                     >
-                      profile
+                      Profile
                     </Link>
                   </li>
                   <li>
@@ -52,22 +46,27 @@ function Header() {
                       to={"/orders"}
                       className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                     >
-                      orders
+                      Orders
                     </Link>
                   </li>
                   <li>
                     <a
-                      onClick={Logout}
-                      className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                      onClick={logout}
+                      className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer"
                     >
-                      logout
+                      Logout
                     </a>
                   </li>
                 </ul>
               </div>
             </li>
           ) : (
-            <Link to={"/login"}>Login</Link>
+            <Link
+              className="hover:bg-[#e72929] hover:text-white  focus:outline-none font-medium rounded-lg text-sm px-5 py-5 text-center inline-flex items-center"
+              to={"/login"}
+            >
+              Login
+            </Link>
           )}
           <li className=" hover:bg-[#e72929] hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-5 text-center inline-flex items-center ">
             <Link to={"/cart"}>

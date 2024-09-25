@@ -29,7 +29,6 @@ router.get("/:foodId", (req, res) => {
 router.get("/tags/:tag", (req, res) => {
   const { tag } = req.params;
   const foods = sample_food.filter((item) => item.tag.includes(tag));
-  console.log("foods is " + foods);
   res.send(foods);
 });
 
