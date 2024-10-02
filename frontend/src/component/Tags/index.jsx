@@ -11,15 +11,15 @@ function Tags({ tags, forFoodPage }) {
       ) : (
         tags.map((tag) => (
           <Link
-            key={tag.name}
-            to={`/tags/${tag.name}`}
+            key={tag.tag}
+            to={`/tags/${tag.tag}`}
             className={`px-2 py-1 rounded-md text-sm ${
               !forFoodPage
                 ? "bg-gray-100 text-blue-500"
                 : "bg-gray-200 text-gray-700"
             }`}
           >
-            {tag.name}
+            {tag.tag}
             {!forFoodPage && `(${tag.count})`}
           </Link>
         ))

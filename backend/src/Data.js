@@ -68,33 +68,33 @@ export const sample_food = [
 ];
 
 export const sample_tags = [
-  { name: "All", count: 6 },
+  { tag: "All", count: 6 },
   {
-    name: "Fast food",
+    tag: "Fast food",
     count: 4,
   },
   {
-    name: "Pizza",
+    tag: "Pizza",
     count: 2,
   },
   {
-    name: "Lunch",
+    tag: "Lunch",
     count: 3,
   },
   {
-    name: "slow food",
+    tag: "slow food",
     count: 2,
   },
   {
-    name: "Humburger",
+    tag: "Humburger",
     count: 1,
   },
   {
-    name: "Fry",
+    tag: "Fry",
     count: 1,
   },
   {
-    name: "Soup",
+    tag: "Soup",
     count: 1,
   },
 ];

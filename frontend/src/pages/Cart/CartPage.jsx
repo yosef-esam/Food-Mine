@@ -20,7 +20,7 @@ function CartPage() {
               >
                 <div className="flex items-center space-x-4">
                   <img
-                    src={`/Food/${item.food.imageUrl}`}
+                    src={`${item.food.imageUrl}`}
                     alt={item.food.name}
                     className="w-16 h-16 rounded-full object-cover"
                   />

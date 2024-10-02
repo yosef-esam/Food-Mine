@@ -13,11 +13,11 @@ function Thumbnails({ food }) {
         food.map((item) => (
           <li key={item.id} className="w-1/4 p-2">
             <Link
-              to={`/food/${item.id}`}
+              to={`/food/${item._id}`}
               className="h-[22.5rem] w-[20rem] border-solid border-white rounded-2xl m-[.5rem] flex flex-col overflow-hidden shadow-md "
             >
               <img
-                src={`/Food/${item.imageUrl}`}
+                src={`${item.imageUrl}`}
                 alt={item.name}
                 className=" object-cover  h-[14.5rem] rounded-lg"
               />

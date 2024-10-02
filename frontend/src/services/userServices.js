@@ -12,6 +12,12 @@ export const Login = async (email, password) => {
   return data;
 };
 
+export const register = async (registerInfo) => {
+  const { data } = await axios.post("/api/users/register", registerInfo);
+  localStorage.setItem("user", JSON.stringify(data));
+  return data;
+};
+
 export const Logout = () => {
   localStorage.removeItem("user");
 };

@@ -1,13 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../../hooks/useAuth";
 import { useNavigate, useSearchParams, Link } from "react-router-dom";
+function RegisterPage() {
+  const { register, user } = useAuth();
 
-function Loginpage() {
-  const { user, login } = useAuth();
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [address, setAddress] = useState("");
+  const [error, setError] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
+  const [confirmPasswordError, setConfirmPasswordError] = useState("");
+
   const navigate = useNavigate();
   const [params] = useSearchParams();
   const redirectTo = params.get("redirect_to") || "/";
@@ -23,6 +29,7 @@ function Loginpage() {
     // Reset errors
     setEmailError("");
     setPasswordError("");
+    setConfirmPasswordError("");
 
     // Input validation
     let valid = true;
@@ -34,23 +41,28 @@ function Loginpage() {
       setPasswordError("Password must be at least 6 characters long");
       valid = false;
     }
+    if (password !== confirmPassword) {
+      setConfirmPasswordError("Passwords do not match");
+      valid = false;
+    }
 
     if (!valid) return;
 
-    // Proceed with login if no errors
+    // Proceed with registration if no errors
     try {
-      await login(email, password);
+      await register({
+        name: name,
+        email: email,
+        password: password,
+        address: address,
+      });
     } catch (err) {
-      // Handle login failure (e.g., incorrect credentials)
-      setEmailError("Incorrect email or password");
-      setPasswordError("Incorrect email or password");
+      setError(err.message);
     }
   };
-
   useEffect(() => {
     if (!user) return;
     if (user) {
-      // Redirect only once when user is logged in
       navigate(redirectTo);
     }
   }, [user]);
@@ -58,16 +70,25 @@ function Loginpage() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
-        <h1 className="text-2xl font-bold mb-6 text-center">Login Page</h1>
+        <h1 className="text-2xl font-bold mb-6 text-center">Register Page</h1>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <input
               type="text"
+              placeholder="Name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            />
+          </div>
+          <div>
+            <input
+              type="email"
               placeholder="Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className={`w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 ${
-                emailError ? "border-red-500" : "border-gray-300"
+                emailError && "border-red-500"
               }`}
             />
             {emailError && (
@@ -81,27 +102,56 @@ function Loginpage() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className={`w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 ${
-                passwordError ? "border-red-500" : "border-gray-300"
+                passwordError && "border-red-500"
               }`}
             />
             {passwordError && (
               <p className="text-red-500 text-sm mt-1">{passwordError}</p>
             )}
           </div>
+          <div>
+            <input
+              type="password"
+              placeholder="Confirm Password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              className={`w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 ${
+                confirmPasswordError && "border-red-500"
+              }`}
+            />
+            {confirmPasswordError && (
+              <p className="text-red-500 text-sm mt-1">
+                {confirmPasswordError}
+              </p>
+            )}
+          </div>
+          <div>
+            <input
+              type="text"
+              placeholder="Address"
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+              className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            />
+          </div>
           <button
             type="submit"
             className="w-full p-2 bg-red-500 text-white font-semibold rounded-lg hover:bg-red-600 transition duration-300"
           >
-            Login
+            Register
           </button>
+          {error && (
+            <p className="text-red-500 text-sm mt-1 text-center">{error}</p>
+          )}
         </form>
+
         <p className="mt-4 text-center">
-          new user ?{" "}
+          Already have an account?{" "}
           <Link
             className="text-blue-500 underline"
-            to={`/register${redirectTo ? `?redirect_to=` + redirectTo : ``}`}
+            to={`/login${redirectTo ? `?redirect_to=` + redirectTo : ``}`}
           >
-            Register here
+            Login
           </Link>
         </p>
       </div>
@@ -109,4 +159,4 @@ function Loginpage() {
   );
 }
 
-export default Loginpage;
+export default RegisterPage;

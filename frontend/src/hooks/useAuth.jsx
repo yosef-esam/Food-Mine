@@ -15,13 +15,23 @@ function AuthProvider({ children }) {
       toast.error(error.response.data);
     }
   };
+  const register = async (data) => {
+    try {
+      const user = await userService.register(data);
+      setUser(user);
+      toast.success("Registration Successful");
+    } catch (error) {
+      toast.error(error.response.data);
+    }
+  };
+
   const logout = () => {
     userService.Logout();
     setUser(null);
     toast.success("Logout Successful");
   };
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={{ user, login, register, logout }}>
       {children}
     </AuthContext.Provider>
   );

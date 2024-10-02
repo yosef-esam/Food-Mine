@@ -31,7 +31,7 @@ function FoodPage() {
           <div className="w-full max-w-[600px] px-4 mr-8">
             <img
               className="w-full rounded-md"
-              src={`/Food/${food.imageUrl}`}
+              src={`${food.imageUrl}`}
               alt={food.name}
             />
           </div>

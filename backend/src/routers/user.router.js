@@ -1,24 +1,55 @@
 import { Router } from "express";
-import { sample_users } from "../Data.js";
 import jwt from "jsonwebtoken";
+import handler from "express-async-handler";
+import bcrypt from "bcryptjs";
+import { UserModel } from "../models/user.model.js";
 const router = Router();
 
-router.post("/login", (req, res) => {
-  const { email, password } = req.body;
-  const user = sample_users.find(
-    (user) => user.email === email && user.password === password
-  );
-  if (user) {
-    res.send(generateTokenResponse(user));
-    return;
-  }
-  res.status(400).send("Invalid email or password");
-});
+router.post(
+  "/login",
+  handler(async (req, res) => {
+    const { email, password } = req.body;
+    const user = await UserModel.findOne({ email });
+    if (user && (await bcrypt.compare(password, user.password))) {
+      res.send(generateTokenResponse(user));
+      return;
+    }
+    res.status(400).send("Invalid email or password");
+  })
+);
+router.post(
+  "/register",
+  handler(async (req, res) => {
+    const { name, email, password, address } = req.body;
+    try {
+      const existingUser = await UserModel.findOne({ email });
+      if (existingUser) {
+        return res.status(400).send("Email already exists");
+      }
+
+      const hashedPassword = await bcrypt.hash(password, 10);
+
+      const newUser = await UserModel.create({
+        name,
+        email,
+        password: hashedPassword,
+        address,
+      });
+
+      res.send(generateTokenResponse(newUser));
+    } catch (err) {
+      console.error("Error creating user:", err);
+      return res
+        .status(500)
+        .json({ message: "Server error during registration" });
+    }
+  })
+);
 
 const generateTokenResponse = (user) => {
   const token = jwt.sign(
-    { id: user.id, email: user.email, isAdmin: user.isAdmin },
-    "your_secret_key",
+    { id: user._id, email: user.email, isAdmin: user.isAdmin },
+    process.env.JWT_SECRET,
     {
       expiresIn: "30d",
     }
