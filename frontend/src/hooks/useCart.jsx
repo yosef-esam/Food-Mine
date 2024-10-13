@@ -19,7 +19,7 @@ function CartProvider({ children }) {
 
   const RemoveItem = (removedItem) => {
     const filteredItems = cartItem.filter(
-      (item) => item.food.id !== removedItem
+      (item) => item.food._id !== removedItem
     );
     setCartitem(filteredItems);
   };
@@ -32,7 +32,7 @@ function CartProvider({ children }) {
     };
     setCartitem(
       cartItem.map((item) =>
-        item.food.id === Item.food.id ? updatedCartItem : item
+        item.food._id === Item.food._id ? updatedCartItem : item
       )
     );
   };
@@ -54,7 +54,7 @@ function CartProvider({ children }) {
   };
 
   const AddItem = (food) => {
-    const item = cartItem.find((item) => item.food.id === food.id);
+    const item = cartItem.find((item) => item.food._id === food._id);
     if (item) {
       ChangedCartItem(item, item.quentity + 1);
     } else {

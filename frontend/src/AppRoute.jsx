@@ -5,6 +5,8 @@ import FoodPage from "./pages/Food/FoodPage";
 import CartPage from "./pages/Cart/CartPage";
 import Loginpage from "./pages/login/Loginpage";
 import RegisterPage from "./pages/Register/RegisterPage";
+import AuthRoute from "./component/AuthRoute";
+import CkeckoutPage from "./pages/Checkout/CkeckoutPage";
 
 function AppRoute() {
   return (
@@ -16,6 +18,14 @@ function AppRoute() {
       <Route path="/cart" element={<CartPage />} />
       <Route path="/login" element={<Loginpage />} />
       <Route path="/register" element={<RegisterPage />} />
+      <Route
+        path="/checkout"
+        element={
+          <AuthRoute>
+            <CkeckoutPage />
+          </AuthRoute>
+        }
+      />
     </Routes>
   );
 }

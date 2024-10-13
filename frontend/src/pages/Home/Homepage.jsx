@@ -43,9 +43,6 @@ function Homepage() {
     <>
       <Search />
       <Tags tags={tags} />
-      {food.length === 0 && (
-        <NotFound message={"  The page you're looking for doesn't exist."} />
-      )}
       <Thumbnails food={food} />;
     </>
   );

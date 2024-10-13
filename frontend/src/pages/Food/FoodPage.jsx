@@ -20,6 +20,7 @@ function FoodPage() {
       setFood(data);
     });
   }, [id]);
+  console.log(food);
 
   return (
     <>

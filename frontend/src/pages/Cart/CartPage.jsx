@@ -5,7 +5,7 @@ import NotFound from "../../component/NotFound";
 
 function CartPage() {
   const { cart, RemoveItem, ChangedCartItem } = useCart();
-
+  console.log(cart);
   return (
     <div className="flex justify-center p-4">
       {cart.items.length == 0 ? (
@@ -15,7 +15,7 @@ function CartPage() {
           <ul className="divide-y divide-gray-200">
             {cart.items.map((item) => (
               <li
-                key={item.food.id}
+                key={item.food._id}
                 className="flex items-center justify-between py-4"
               >
                 <div className="flex items-center space-x-4">
@@ -25,7 +25,7 @@ function CartPage() {
                     className="w-16 h-16 rounded-full object-cover"
                   />
                   <Link
-                    to={`/food/${item.food.id}`}
+                    to={`/food/${item.food._id}`}
                     className="text-lg font-semibold text-purple-700"
                   >
                     {item.food.name}
@@ -51,7 +51,7 @@ function CartPage() {
 
                 <button
                   className="text-red-500 hover:text-red-700"
-                  onClick={() => RemoveItem(item.food.id)}
+                  onClick={() => RemoveItem(item.food._id)}
                 >
                   Remove
                 </button>
