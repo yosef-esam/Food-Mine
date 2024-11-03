@@ -21,3 +21,13 @@ export const register = async (registerInfo) => {
 export const Logout = () => {
   localStorage.removeItem("user");
 };
+export const updateProfile = async (updateuser) => {
+  const { data } = await axios.put("/api/users/updateProfile", updateuser);
+  localStorage.setItem("user", JSON.stringify(data));
+  return data;
+};
+export const changePassword = async (passwords) => {
+  const { data } = await axios.put("/api/users/changePassword", passwords);
+  localStorage.setItem("user", JSON.stringify(data));
+  return data;
+};

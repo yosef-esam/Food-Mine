@@ -24,14 +24,30 @@ function AuthProvider({ children }) {
       toast.error(error.response.data);
     }
   };
+  const updateProfile = async (data) => {
+    try {
+      const user = await userService.updateProfile(data);
+      setUser(user);
+      toast.success("Profile updated successfully");
+    } catch (error) {
+      toast.error(error.response.data);
+    }
+  };
 
   const logout = () => {
     userService.Logout();
     setUser(null);
     toast.success("Logout Successful");
   };
+  const changePassword = async (passwords) => {
+    await userService.changePassword(passwords);
+    logout();
+    toast.success("Password updated successfully");
+  };
   return (
-    <AuthContext.Provider value={{ user, login, register, logout }}>
+    <AuthContext.Provider
+      value={{ user, login, register, logout, updateProfile, changePassword }}
+    >
       {children}
     </AuthContext.Provider>
   );

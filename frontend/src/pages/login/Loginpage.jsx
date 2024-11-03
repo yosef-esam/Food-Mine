@@ -37,7 +37,6 @@ function Loginpage() {
 
     if (!valid) return;
 
-    // Proceed with login if no errors
     try {
       await login(email, password);
     } catch (err) {

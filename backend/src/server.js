@@ -6,6 +6,7 @@ import cors from "cors";
 import FoodRouter from "./routers/food.router.js";
 import UserRouter from "./routers/user.router.js";
 import { dbconnect } from "./config/database.config.js";
+import OrderRouter from "./routers/order.router.js";
 
 dbconnect();
 const app = express();
@@ -20,6 +21,7 @@ app.use(
 
 app.use("/api/foods", FoodRouter);
 app.use("/api/users", UserRouter);
+app.use("/api/orders", OrderRouter);
 const port = 5000;
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`); // logs to the console when server is running

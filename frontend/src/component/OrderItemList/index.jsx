@@ -29,7 +29,7 @@ function OrderItemList({ order }) {
         <tr className="border-b border-gray-200">
           <td colSpan={3} className="py-2">
             <td className="py-2 font-semibold">Total:</td>
-            <td className="py-2">{order.TotalPrice}</td>
+            <td className="py-2">{order.TotalPrice}$</td>
           </td>
         </tr>
       </tbody>

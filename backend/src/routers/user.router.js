@@ -3,6 +3,7 @@ import jwt from "jsonwebtoken";
 import handler from "express-async-handler";
 import bcrypt from "bcryptjs";
 import { UserModel } from "../models/user.model.js";
+import auth from "../middleware/auth.mid.js";
 const router = Router();
 
 router.post(
@@ -43,6 +44,40 @@ router.post(
         .status(500)
         .json({ message: "Server error during registration" });
     }
+  })
+);
+router.put(
+  "/updateProfile",
+  auth,
+  handler(async (req, res) => {
+    const { name, address } = req.body;
+    const user = await UserModel.findByIdAndUpdate(
+      req.user.id,
+      {
+        name,
+        address,
+      },
+      { new: true }
+    );
+    res.send(generateTokenResponse(user));
+  })
+);
+router.put(
+  "/changePassword",
+  auth,
+  handler(async (req, res) => {
+    const { currentpassword, newpassword } = req.body;
+    const user = await UserModel.findById(req.user.id);
+    if (!user) {
+      return res.status(401).send("Change Password failed");
+    }
+    const isMatch = await bcrypt.compare(currentpassword, user.password);
+    if (!isMatch) {
+      return res.status(401).send("Current password is incorrect");
+    }
+    user.password = await bcrypt.hash(newpassword, 10);
+    await user.save();
+    res.send();
   })
 );
 

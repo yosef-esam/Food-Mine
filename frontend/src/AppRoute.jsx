@@ -7,6 +7,10 @@ import Loginpage from "./pages/login/Loginpage";
 import RegisterPage from "./pages/Register/RegisterPage";
 import AuthRoute from "./component/AuthRoute";
 import CkeckoutPage from "./pages/Checkout/CkeckoutPage";
+import PaymendPage from "./pages/Payment/PaymendPage";
+import OrderTrackPage from "./pages/Track/OrderTrackPage";
+import ProfilePage from "./pages/Profile/ProfilePage";
+import OrdersPage from "./pages/Orders/OrdersPage";
 
 function AppRoute() {
   return (
@@ -23,6 +27,38 @@ function AppRoute() {
         element={
           <AuthRoute>
             <CkeckoutPage />
+          </AuthRoute>
+        }
+      />
+      <Route
+        path="/payment"
+        element={
+          <AuthRoute>
+            <PaymendPage />
+          </AuthRoute>
+        }
+      />
+      <Route
+        path="/track/:orderId"
+        element={
+          <AuthRoute>
+            <OrderTrackPage />
+          </AuthRoute>
+        }
+      />
+      <Route
+        path="/profile"
+        element={
+          <AuthRoute>
+            <ProfilePage />
+          </AuthRoute>
+        }
+      />
+      <Route
+        path="/orders/:filter?"
+        element={
+          <AuthRoute>
+            <OrdersPage />
           </AuthRoute>
         }
       />

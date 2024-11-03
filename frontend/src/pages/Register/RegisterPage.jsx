@@ -48,7 +48,6 @@ function RegisterPage() {
 
     if (!valid) return;
 
-    // Proceed with registration if no errors
     try {
       await register({
         name: name,
