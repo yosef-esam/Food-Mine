@@ -41,9 +41,10 @@ router.get(
     const filter = {
       _id: orderId,
     };
-    if (!user.isAdmin) {
+    if (user && !user.isAdmin) {
       filter.user = user._id;
     }
+
     const order = await OrderModel.findOne(filter);
     if (!order) return res.status(401).send();
     res.send(order);
