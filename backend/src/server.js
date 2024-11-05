@@ -15,7 +15,7 @@ app.use(express.json());
 app.use(
   cors({
     origin:
-      "https://food-app-client-kohl.vercel.app" || "http://localhost:5173",
+      " http://localhost:5173" || "https://food-app-client-kohl.vercel.app",
     credentials: true,
   })
 );
@@ -23,6 +23,10 @@ app.use(
 app.use("/api/foods", FoodRouter);
 app.use("/api/users", UserRouter);
 app.use("/api/orders", OrderRouter);
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ error: "Internal Server Error" });
+});
 const port = 5000;
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`); // logs to the console when server is running
