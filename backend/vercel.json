@@ -3,14 +3,14 @@
   "name": "food-app",
   "builds": [
     {
-      "src": "./src/server.js",
-      "use": "@vercel/node"
+      "src": "src/server.js",
+      "use": "@now/node"
     }
   ],
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "/"
+      "dest": "src/server.js"
     }
   ]
 }
