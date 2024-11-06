@@ -13,6 +13,7 @@ export const dbconnect = async () => {
     connect(process.env.MONGO_URL, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
+      maxPoolSize: 10,
     });
     await UserSeed();
     await FoodSeed();
