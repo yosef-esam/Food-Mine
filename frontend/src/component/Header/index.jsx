@@ -17,7 +17,7 @@ function Header() {
           {user ? (
             <li className="relative group">
               <Link
-                to={"/profile"}
+                to={"/dashboard"}
                 id="dropdownHoverButton"
                 className="hover:bg-[#e72929] hover:text-white  focus:outline-none font-medium rounded-lg text-sm px-5 py-5 text-center inline-flex items-center"
                 type="button"
