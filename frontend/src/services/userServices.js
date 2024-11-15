@@ -23,6 +23,7 @@ export const Logout = () => {
 };
 export const updateProfile = async (updateuser) => {
   const { data } = await axios.put("/api/users/updateProfile", updateuser);
+
   localStorage.setItem("user", JSON.stringify(data));
   return data;
 };

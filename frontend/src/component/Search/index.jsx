@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-
-function Search() {
+Search.defaultProps = {
+  SearchRoute: "/search/",
+  defaultRoute: "/",
+};
+function Search({ SearchRoute, defaultRoute }) {
   const [term, setTerm] = useState("");
   const navigate = useNavigate();
   const { searchTerm } = useParams();
   const search = () => {
-    term ? navigate(`/search/${term}`) : navigate("/");
+    term ? navigate(SearchRoute + term) : navigate(defaultRoute);
   };
 
   useEffect(() => {

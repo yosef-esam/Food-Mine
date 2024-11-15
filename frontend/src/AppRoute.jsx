@@ -12,6 +12,9 @@ import OrderTrackPage from "./pages/Track/OrderTrackPage";
 import ProfilePage from "./pages/Profile/ProfilePage";
 import OrdersPage from "./pages/Orders/OrdersPage";
 import Dashboard from "./pages/Dashboard/Dashboard";
+import AdminRouteExport from "./component/AdminRoute";
+import FoodsAdminPage from "./pages/FoodsAdmin/FoodsAdminPage";
+import FoodEditPage from "./pages/FoodEdit/FoodEditPage";
 
 function AppRoute() {
   return (
@@ -69,6 +72,30 @@ function AppRoute() {
           <AuthRoute>
             <Dashboard />
           </AuthRoute>
+        }
+      />
+      <Route
+        path="/admin/foods/:searchTerm?"
+        element={
+          <AdminRouteExport>
+            <FoodsAdminPage />
+          </AdminRouteExport>
+        }
+      />
+      <Route
+        path="/admin/addfood"
+        element={
+          <AdminRouteExport>
+            <FoodEditPage />
+          </AdminRouteExport>
+        }
+      />
+      <Route
+        path="/admin/editfood/:foodId"
+        element={
+          <AdminRouteExport>
+            <FoodEditPage />
+          </AdminRouteExport>
         }
       />
     </Routes>

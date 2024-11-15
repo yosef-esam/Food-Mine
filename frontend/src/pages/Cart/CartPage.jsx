@@ -9,7 +9,7 @@ function CartPage() {
   return (
     <div className="flex justify-center p-4">
       {cart.items.length == 0 ? (
-        <NotFound message={"The Cart is Empty Now !"} />
+        <NotFound message={"The Cart is Empty!"} />
       ) : (
         <div className="w-full max-w-4xl border rounded-lg p-4">
           <ul className="divide-y divide-gray-200">

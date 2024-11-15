@@ -23,3 +23,13 @@ export const getById = async (foodid) => {
   const { data } = await axios.get("/api/foods/" + foodid);
   return data;
 };
+
+export const DeleteFoodId = async (foodid) => {
+  const { data } = await axios.delete("/api/foods/" + foodid);
+  return data;
+};
+
+export const updateFood = async (food) => {
+  const { data } = await axios.put("/api/foods/", food);
+  return data;
+};

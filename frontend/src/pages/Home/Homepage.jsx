@@ -9,7 +9,6 @@ import {
 } from "../../services/foodServices";
 import Search from "../../component/Search";
 import Tags from "../../component/Tags";
-import NotFound from "../../component/NotFound";
 
 const initialState = { food: [], tags: [] };
 const reducer = (state, action) => {
