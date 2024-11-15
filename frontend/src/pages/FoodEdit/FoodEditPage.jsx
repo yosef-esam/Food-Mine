@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { getById, updateFood } from "../../services/foodServices";
+import { useNavigate, useParams } from "react-router-dom";
+import { addFood, getById, updateFood } from "../../services/foodServices";
 import { uploadImage } from "../../services/uploadServices";
 import { toast } from "react-toastify";
 
@@ -11,9 +11,11 @@ function FoodEditPage() {
   const [imageUrl, setImageUrl] = useState();
   const [name, setName] = useState();
   const [price, setPrice] = useState();
-  const [tags, setTags] = useState();
+  const [tag, setTag] = useState();
   const [origins, setOrigins] = useState();
   const [cookTime, setCookTime] = useState();
+  const [favorite, setFavorite] = useState();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!isEditMode) return;
@@ -25,6 +27,7 @@ function FoodEditPage() {
       setPrice(food.price);
       setCookTime(food.cookTime);
       setTags(food.tag);
+      setFavorite(food.favorite);
       setFood(food);
     });
   }, [foodId, isEditMode]);
@@ -37,13 +40,18 @@ function FoodEditPage() {
       price,
       origins,
       cookTime,
-      tag: tags,
+      favorite,
+      tag,
     };
 
-    console.log(updatedFood);
     if (isEditMode) {
       await updateFood(updatedFood);
       toast.success(`food ${updatedFood.name} updated successfully`);
+    } else {
+      const newFood = await addFood(updatedFood); // Corrected function call here
+      console.log(newFood);
+      toast.success(`Food ${newFood.name} added successfully`);
+      navigate(`/admin/editfood/${newFood._id}`, { replace: true }); // Corrected typo
     }
   };
   const upload = async (event) => {
@@ -99,8 +107,8 @@ function FoodEditPage() {
           <input
             type="text"
             placeholder="Tags"
-            onChange={(e) => setTags(e.target.value)}
-            value={tags}
+            onChange={(e) => setTag(e.target.value)}
+            value={tag}
             className="block w-full border border-gray-300 rounded p-2"
           />
           <input
@@ -108,6 +116,13 @@ function FoodEditPage() {
             placeholder="Cook Time"
             onChange={(e) => setCookTime(e.target.value)}
             value={cookTime}
+            className="block w-full border border-gray-300 rounded p-2"
+          />
+          <input
+            type="text"
+            placeholder="Favorite"
+            onChange={(e) => setFavorite(e.target.value)}
+            value={favorite}
             className="block w-full border border-gray-300 rounded p-2"
           />
           <button

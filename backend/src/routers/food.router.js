@@ -81,6 +81,26 @@ router.get(
     res.send(food);
   })
 );
+router.post(
+  "/",
+  admin,
+  handler(async (req, res) => {
+    const { name, price, tag, favorite, imageUrl, origins, cookTime } =
+      req.body;
+
+    const food = new FoodModel({
+      name,
+      price,
+      tag: tag.split ? tag.split(",") : tag,
+      favorite,
+      imageUrl,
+      origins,
+      cookTime,
+    });
+    await food.save();
+    res.send(food);
+  })
+);
 router.put(
   "/",
   admin,

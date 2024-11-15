@@ -33,3 +33,7 @@ export const updateFood = async (food) => {
   const { data } = await axios.put("/api/foods/", food);
   return data;
 };
+export const addFood = async (food) => {
+  const { data } = await axios.post("/api/foods/", food);
+  return data;
+};
