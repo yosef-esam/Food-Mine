@@ -30,7 +30,7 @@ const OrderSchema = new Schema(
 
     TotalPrice: { type: Number, required: true },
     status: { type: String, default: "new" },
-    user: { type: Schema.Types.ObjectId, required: true },
+    user: { type: Schema.Types.ObjectId, required: true, ref: "user" },
   },
   {
     timestamps: true,

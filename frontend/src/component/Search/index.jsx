@@ -3,8 +3,9 @@ import { useNavigate, useParams } from "react-router-dom";
 Search.defaultProps = {
   SearchRoute: "/search/",
   defaultRoute: "/",
+  placeholder: " Search Food Mine ",
 };
-function Search({ SearchRoute, defaultRoute }) {
+function Search({ SearchRoute, defaultRoute, placeholder }) {
   const [term, setTerm] = useState("");
   const navigate = useNavigate();
   const { searchTerm } = useParams();
@@ -20,7 +21,7 @@ function Search({ SearchRoute, defaultRoute }) {
     <div className="flex justify-center p-4  ">
       <input
         type="text"
-        placeholder=" Search Food Mine "
+        placeholder={placeholder}
         className="border-2 border-gray-300 px-4 py-2 rounded-l-md "
         onChange={(e) => setTerm(e.target.value)}
         onKeyUp={(e) => e.key === "Enter" && search()}

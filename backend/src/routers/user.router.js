@@ -4,6 +4,7 @@ import handler from "express-async-handler";
 import bcrypt from "bcryptjs";
 import { UserModel } from "../models/user.model.js";
 import auth from "../middleware/auth.mid.js";
+import admin from "../middleware/admin.mid.js";
 const router = Router();
 
 router.post(
@@ -11,13 +12,19 @@ router.post(
   handler(async (req, res) => {
     const { email, password } = req.body;
     const user = await UserModel.findOne({ email });
+
     if (user && (await bcrypt.compare(password, user.password))) {
+      if (user.isBlocked) {
+        return res.status(403).send("You are not allowed to login");
+      }
       res.send(generateTokenResponse(user));
       return;
     }
+
     res.status(400).send("Invalid email or password");
   })
 );
+
 router.post(
   "/register",
   handler(async (req, res) => {
@@ -78,6 +85,55 @@ router.put(
     user.password = await bcrypt.hash(newpassword, 10);
     await user.save();
     res.send();
+  })
+);
+router.get(
+  "/getAll/:searchTerm?",
+  admin,
+  handler(async (req, res) => {
+    const { searchTerm } = req.params;
+    const filter = searchTerm
+      ? { name: { $regex: new RegExp(searchTerm, "i") } }
+      : {};
+    const users = await UserModel.find(filter, { password: 0 });
+    res.send(users);
+  })
+);
+router.get(
+  "/getById/:userId",
+  admin,
+  handler(async (req, res) => {
+    const { userId } = req.params;
+    const user = await UserModel.findById(userId, { password: 0 });
+    res.send(user);
+  })
+);
+router.put(
+  "/EditUser",
+  admin,
+  handler(async (req, res) => {
+    const { _id, name, email, address, isAdmin } = req.body;
+    await UserModel.findOneAndUpdate(
+      { _id },
+      { name, email, address, isAdmin }
+    );
+    res.send();
+  })
+);
+router.put(
+  "/toggleBlock/:userId?",
+  admin,
+  handler(async (req, res) => {
+    const { userId } = req.params;
+    if (userId === req.user._id) {
+      res.status(404).send("can't Block Yourself!");
+      return;
+    }
+    const user = await UserModel.findById(userId);
+    user.isBlocked = !user.isBlocked;
+
+    await user.save();
+    res.send(user.isBlocked);
   })
 );
 

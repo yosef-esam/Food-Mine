@@ -3,6 +3,7 @@ import handler from "express-async-handler";
 import authenticateToken from "../middleware/auth.mid.js";
 import { OrderModel } from "../models/order.model.js";
 import { UserModel } from "../models/user.model.js";
+import { mailSender } from "../config/mail.config.js";
 
 const router = Router();
 router.use(authenticateToken);
@@ -30,6 +31,8 @@ router.put(
     order.paymentId = paymentId;
     order.status = "paid";
     await order.save();
+
+    mailSender(order);
     res.send(order._id);
   })
 );
@@ -84,7 +87,10 @@ router.get(
 );
 
 const getNewOrderForCurrentUser = async (req) => {
-  return await OrderModel.findOne({ user: req.user.id, status: "new" });
+  return await OrderModel.findOne({
+    user: req.user.id,
+    status: "new",
+  }).populate("user");
 };
 
 export default router;

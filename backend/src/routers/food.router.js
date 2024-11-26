@@ -114,7 +114,7 @@ router.put(
       {
         name,
         price,
-        tag: tag.split ? tag.split(",") : tag,
+        tag,
         favorite,
         imageUrl,
         origins,

@@ -26,7 +26,7 @@ function FoodEditPage() {
       setOrigins(food.origins);
       setPrice(food.price);
       setCookTime(food.cookTime);
-      setTags(food.tag);
+      setTag(food.tag);
       setFavorite(food.favorite);
       setFood(food);
     });

@@ -25,20 +25,26 @@ function CartProvider({ children }) {
   };
 
   const ChangedCartItem = (Item, newQuentity) => {
+    if (newQuentity < 1) return;
+
     const updatedCartItem = {
       ...Item,
       quentity: newQuentity,
-      price: Item.price * newQuentity,
+      price: Item.food.price * newQuentity,
     };
+
+    // Update the cartItem state with the new quantity and price for the changed item
     setCartitem(
       cartItem.map((item) =>
         item.food._id === Item.food._id ? updatedCartItem : item
       )
     );
   };
+
   useEffect(() => {
     setTotalPrice(sum(cartItem.map((item) => item.price)));
     setTotlaCount(sum(cartItem.map((item) => item.quentity)));
+
     localStorage.setItem(
       CART_KEY,
       JSON.stringify({
@@ -49,8 +55,8 @@ function CartProvider({ children }) {
     );
   }, [cartItem]);
 
-  const sum = (item) => {
-    return item.reduce((prevItem, currItem) => prevItem + currItem, 0);
+  const sum = (values) => {
+    return values.reduce((total, value) => total + value, 0);
   };
 
   const AddItem = (food) => {

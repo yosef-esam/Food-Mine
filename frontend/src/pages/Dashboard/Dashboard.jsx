@@ -20,7 +20,7 @@ function Dashboard() {
     },
     {
       label: "users",
-      Link: "users",
+      Link: "admin/users",
       forAdmin: true,
       icon: "../public/icons/users.png",
       bgColor: "bg-teal-500",

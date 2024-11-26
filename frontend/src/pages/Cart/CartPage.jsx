@@ -35,16 +35,20 @@ function CartPage() {
                 <div className="flex items-center space-x-2">
                   <select
                     value={item.quentity}
-                    className="border rounded-md p-2 bg-white focus:outline-none focus:ring-2 focus:ring-purple-500"
                     onChange={(e) =>
                       ChangedCartItem(item, Number(e.target.value))
                     }
                   >
-                    {[...Array(10).keys()].map((num) => (
-                      <option key={num + 1} value={num + 1}>
-                        {num + 1}
-                      </option>
-                    ))}
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
                   </select>
                   <div className="text-lg font-semibold">${item.price}</div>
                 </div>
