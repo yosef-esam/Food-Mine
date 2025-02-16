@@ -7,7 +7,7 @@ export const sample_food = [
     favorite: false,
     origins: "Italy",
     stars: 4.5,
-    imageUrl: "perfume.png",
+    imageUrl: "burgur.png",
     tag: ["Italian", "Fast food", "Pizza"],
   },
   {
@@ -18,7 +18,7 @@ export const sample_food = [
     favorite: false,
     origins: "USA",
     stars: 4.2,
-    imageUrl: "phone.png",
+    imageUrl: "burger.png",
     tag: ["American", "Fast food"],
   },
   {
@@ -29,7 +29,7 @@ export const sample_food = [
     favorite: true,
     origins: "Europe",
     stars: 4.8,
-    imageUrl: "playstation.png",
+    imageUrl: "salad.png",
     tag: ["slow food", "Humburger", "Lunch"],
   },
   {
@@ -40,7 +40,7 @@ export const sample_food = [
     favorite: false,
     origins: "USA",
     stars: 4.1,
-    imageUrl: "shoes.png",
+    imageUrl: "fries.png",
     tag: ["American", "Fast food", "Lunch"],
   },
   {
@@ -51,7 +51,7 @@ export const sample_food = [
     favorite: false,
     origins: "Italy",
     stars: 4.7,
-    imageUrl: "speakers.png",
+    imageUrl: "pasta.png",
     tag: ["Soup", "slow food", "Lunch"],
   },
   {
@@ -62,7 +62,7 @@ export const sample_food = [
     favorite: false,
     origins: "Mexico",
     stars: 4.6,
-    imageUrl: "tv.png",
+    imageUrl: "tacos.png",
     tag: ["Fry", "Fast food", "Pizza"],
   },
 ];
