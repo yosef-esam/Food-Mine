@@ -7,7 +7,7 @@ export const sample_food = [
     favorite: false,
     origins: "Italy",
     stars: 4.5,
-    imageUrl: "burgur.png",
+    imageUrl: "pizza.png",
     tag: ["Italian", "Fast food", "Pizza"],
   },
   {
