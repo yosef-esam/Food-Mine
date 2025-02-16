@@ -69,7 +69,7 @@ function FoodEditPage() {
         <form onSubmit={handleSubmit} className="space-y-4">
           <label className=" text-gray-700">Select Image:</label>
           <input
-            onChange={imageUrl}
+            onChange={(e) => setImageUrl(e.target.value)}
             className="block w-full text-sm text-gray-500 border border-gray-300 rounded p-2"
           />
           {imageUrl && (
