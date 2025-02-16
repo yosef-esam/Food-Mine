@@ -30,7 +30,7 @@ const uploadImageToCloudinary = (imageBuffer) => {
     if (!imageBuffer) reject(null);
 
     cloudinary.uploader
-      .upload_stream((error, result) => {
+      .upload_stream({ angle: "exif" }, (error, result) => {
         if (error || !result) reject(error);
         else resolve(result.url);
       })
