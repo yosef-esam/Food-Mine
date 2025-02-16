@@ -15,7 +15,7 @@ app.use(express.json());
 
 app.use(
   cors({
-    origin: "http://localhost:5174",
+    origin: "https://food-app-ten-xi.vercel.app/",
 
     credentials: true,
   })
