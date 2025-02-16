@@ -15,7 +15,7 @@ app.use(express.json());
 
 app.use(
   cors({
-    origin: "http://localhost:5175",
+    origin: "https://food-app-client-kappa.vercel.app/",
 
     credentials: true,
   })

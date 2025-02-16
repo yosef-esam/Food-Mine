@@ -60,8 +60,7 @@ router.get(
 
     if (order) {
       res.send(order);
-      console.log(order);
-    } else res.status(404).send("yyyyyyyyy");
+    } else res.status(404).send();
   })
 );
 
