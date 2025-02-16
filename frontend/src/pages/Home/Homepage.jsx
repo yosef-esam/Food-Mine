@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer } from "react";
+import React, { useEffect, useState } from "react";
 import Thumbnails from "../../component/Thumbnails";
 import { useParams } from "react-router-dom";
 import {
@@ -10,39 +10,36 @@ import {
 import Search from "../../component/Search";
 import Tags from "../../component/Tags";
 
-const initialState = { food: [], tags: [] };
-const reducer = (state, action) => {
-  switch (action.type) {
-    case "FOODS_LOADED":
-      return { ...state, food: action.payload };
-    case "TAGS_LOADED":
-      return { ...state, tags: action.payload };
-    default:
-      return state;
-  }
-};
 function Homepage() {
-  const [state, dispatch] = useReducer(reducer, initialState);
-  const { food, tags } = state;
   const { searchTerm, Tag } = useParams();
+  const [food, setFood] = useState([]);
+  const [tags, setTags] = useState([]);
 
-  const loadFood = Tag
-    ? getAllByTags(Tag)
-    : searchTerm
-    ? search(searchTerm)
-    : getAll();
   useEffect(() => {
-    getAllTags().then((tags) =>
-      dispatch({ type: "TAGS_LOADED", payload: tags })
-    );
-    loadFood.then((food) => dispatch({ type: "FOODS_LOADED", payload: food }));
+    const fetchData = async () => {
+      if (searchTerm) {
+        const searchResults = await search(searchTerm);
+        setFood(searchResults);
+      } else if (Tag) {
+        const tagResults = await getAllByTags(Tag);
+        setFood(tagResults);
+      } else {
+        const allFood = await getAll();
+        setFood(allFood);
+      }
+
+      const allTags = await getAllTags();
+      setTags(allTags);
+    };
+
+    fetchData();
   }, [searchTerm, Tag]);
 
   return (
     <>
       <Search />
       <Tags tags={tags} />
-      <Thumbnails food={food} />;
+      <Thumbnails food={food} />
     </>
   );
 }
