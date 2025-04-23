@@ -11,7 +11,7 @@ function Loading() {
       <div className=" fixed w-full h-full bg-[#ededee] z-50  top-0 left-0 ">
         <div className=" flex items-center justify-center flex-col  h-[80%] w-[80#]">
           <img
-            src="https://medihttps://usagif.com/wp-content/uploads/loading-81.gif"
+            src="https://usagif.com/wp-content/uploads/loading-81.gif"
             alt=""
           />
         </div>
