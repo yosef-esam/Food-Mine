@@ -15,7 +15,7 @@ app.use(express.json());
 
 // Define your allowed origins
 const allowedOrigins = [
-  'http://localhost:1573', // For your local development on port 1573
+  'http://localhost:5173', // For your local development on port 1573
   'https://food-app-client-kappa.vercel.app' // For your Vercel deployed client
 ];
 
