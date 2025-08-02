@@ -1,8 +1,6 @@
 {
   "version": 2,
-  "rewrites": [{ "source": "/(.*)", "destination": "/api" }],   
-  
-   
+  "rewrites": [{ "source": "/(.*)", "destination": "/api" }],
   "name": "food-app-backend",
   "builds": [
     {
@@ -10,7 +8,16 @@
       "use": "@vercel/node"
     }
   ],
-
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "src/server.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "src/server.js"
+    }
+  ],
   "env": {
     "NODE_ENV": "production"
   }
