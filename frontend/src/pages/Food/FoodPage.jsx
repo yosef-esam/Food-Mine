@@ -20,25 +20,24 @@ function FoodPage() {
       setFood(data);
     });
   }, [id]);
-  console.log(food);
 
   return (
-    <>
-      {!food ? (
+    <div className="flex justify-center items-center min-h-[60vh] bg-[#f7f7f7] py-8 px-2">
+      {!food || !food._id ? (
         <NotFound message={" The page you're looking for doesn't exist."} />
       ) : (
-        <div className="flex flex-wrap items-center p-4  rounded-lg ">
+        <div className="flex flex-col md:flex-row bg-white rounded-xl shadow-lg border border-[#f4f0f0] p-6 w-full max-w-4xl gap-8">
           {/* Image Section */}
-          <div className="w-full max-w-[600px] px-4 mr-8">
+          <div className="w-full md:w-[340px] flex-shrink-0 flex justify-center items-center">
             <img
-              className="w-full rounded-md"
-              src={`${food.imageUrl}`}
+              className="w-full h-64 object-cover rounded-xl border border-[#f4f0f0]"
+              src={food.imageUrl}
               alt={food.name}
             />
           </div>
 
           {/* Details Section */}
-          <div className="flex-1 px-4 space-y-3 relative">
+          <div className="flex-1 flex flex-col gap-4 relative">
             {/* Heart Icon */}
             <span
               className={`absolute top-2 right-2 text-3xl ${
@@ -49,34 +48,36 @@ function FoodPage() {
             </span>
 
             {/* Food Name and Rating */}
-            <div className="text-2xl font-semibold">{food.name}</div>
+            <div className="text-2xl font-bold text-[#181111]">{food.name}</div>
             <Rating
               name="half-rating"
               value={food.stars}
               precision={0.5}
               className="text-yellow-500"
+              readOnly
             />
 
             {/* Origin Tags */}
-            <div className="flex flex-wrap space-x-2">
-              <span className="text-sm bg-gray-200 text-gray-600 px-2 py-1 rounded-full">
-                {food.origin}
-              </span>
+            <div className="flex flex-wrap gap-2">
+              {food.origin && (
+                <span className="bg-[#f4f0f0] text-[#181111] text-xs font-medium rounded-lg px-3 py-1">
+                  {food.origin}
+                </span>
+              )}
             </div>
 
             {/* Cook Time */}
-            <div className="text-gray-600">
-              Time to cook about {food.cookTime}
+            <div className="text-[#886364] text-sm flex items-center gap-1">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 256 256"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm40-88a8,8,0,0,1-8,8H136v32a8,8,0,0,1-16,0V128a8,8,0,0,1,8-8h32A8,8,0,0,1,168,128Z"></path></svg>
+              {food.cookTime}
             </div>
 
             {/* Price */}
-            <div className="text-xl font-semibold text-green-500">
-              Price: {food.price}$
-            </div>
+            <div className="text-xl font-bold text-[#181111]">{food.price}$</div>
 
             {/* Add to Cart Button */}
             <button
-              className="w-full max-w-[600px] px-4 py-2 text-white bg-red-600 rounded-full"
+              className="w-full md:w-auto px-8 py-3 text-white bg-[#181111] rounded-lg font-bold text-base shadow hover:bg-[#2d2323] transition-colors mt-2"
               onClick={AddItemHandle}
             >
               Add to Cart
@@ -84,8 +85,8 @@ function FoodPage() {
           </div>
         </div>
       )}
-    </>
-  ); // Display food data or a message
+    </div>
+  );
 }
 
 export default FoodPage;

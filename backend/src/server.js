@@ -1,5 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
+import path from "path";
 
 dotenv.config();
 import cors from "cors";
@@ -15,7 +16,7 @@ app.use(express.json());
 
 // Define your allowed origins
 const allowedOrigins = [
-  "http://localhost:1573", // For your local development on port 1573
+  "http://localhost:5173", // For your local development on port 1573
   "https://food-app-client-kappa.vercel.app", // For your Vercel deployed client
 ];
 
@@ -38,6 +39,9 @@ app.use(
     credentials: true,
   })
 );
+
+// Serve static files from uploads directory
+app.use("/uploads", express.static(path.join(process.cwd(), "uploads")));
 
 app.use("/api/foods", FoodRouter);
 app.use("/api/users", UserRouter);
