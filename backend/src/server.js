@@ -14,22 +14,17 @@ dbconnect();
 const app = express();
 app.use(express.json());
 
-// Define your allowed origins
 const allowedOrigins = [
   "http://localhost:5173", // For your local development on port 1573
   "https://food-hub-rho-silk.vercel.app", // For your Vercel deployed client
 ];
 
-// Configure CORS to allow multiple origins
 app.use(
   cors({
     origin: function (origin, callback) {
-      // Allow requests with no origin (like mobile apps or curl requests)
-      // This is often needed for server-to-server requests or if you have
-      // clients that don't send an Origin header (e.g., some desktop apps).
+     
       if (!origin) return callback(null, true);
 
-      // Check if the incoming origin is in our allowedOrigins list
       if (allowedOrigins.indexOf(origin) === -1) {
         const msg = `The CORS policy for this site does not allow access from the specified Origin: ${origin}.`;
         return callback(new Error(msg), false);
@@ -40,7 +35,6 @@ app.use(
   })
 );
 
-// Serve static files from uploads directory
 app.use("/uploads", express.static(path.join(process.cwd(), "uploads")));
 
 app.use("/api/foods", FoodRouter);
