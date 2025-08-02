@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "name": "food-app",
+  "name": "food-app-backend",
   "builds": [
     {
       "src": "src/server.js",
@@ -9,8 +9,15 @@
   ],
   "routes": [
     {
+      "src": "/api/(.*)",
+      "dest": "src/server.js"
+    },
+    {
       "src": "/(.*)",
       "dest": "src/server.js"
     }
-  ]
+  ],
+  "env": {
+    "NODE_ENV": "production"
+  }
 }
