@@ -34,7 +34,6 @@ app.use(
   })
 );
 
-app.use("/uploads", express.static(path.join(process.cwd(), "uploads")));
 
 app.use("/api/foods", FoodRouter);
 app.use("/api/users", UserRouter);
