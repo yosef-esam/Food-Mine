@@ -27,6 +27,7 @@ app.use(
       // Allow requests with no origin (like mobile apps or curl requests)
       // This is often needed for server-to-server requests or if you have
       // clients that don't send an Origin header (e.g., some desktop apps).
+      //sssssssss
       if (!origin) return callback(null, true);
 
       // Check if the incoming origin is in our allowedOrigins list
@@ -40,7 +41,7 @@ app.use(
   })
 );
 
-// Serve static files from uploads directory
+// Serve static files from uploads 
 app.use("/uploads", express.static(path.join(process.cwd(), "uploads")));
 
 app.use("/api/foods", FoodRouter);
