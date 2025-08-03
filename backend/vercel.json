@@ -1,6 +1,5 @@
 {
   "version": 2,
-  
   "name": "food-app-backend",
   "builds": [
     {
@@ -12,11 +11,6 @@
     {
       "src": "/api/(.*)",
       "dest": "src/server.js"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "src/server.js"
     }
   ]
-
 }
