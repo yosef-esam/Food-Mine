@@ -38,10 +38,10 @@ app.get('/', (req, res) => {
   });
 });
 
-// app.use("/api/foods", FoodRouter);
-// app.use("/api/users", UserRouter);
-// app.use("/api/orders", OrderRouter);
-// app.use("/api/upload", uploadRouter);
+app.use("/api/foods", FoodRouter);
+app.use("/api/users", UserRouter);
+app.use("/api/orders", OrderRouter);
+app.use("/api/upload", uploadRouter);
 
 // ✅ Export the Express app for Vercel
 if (process.env.NODE_ENV !== "production") {
