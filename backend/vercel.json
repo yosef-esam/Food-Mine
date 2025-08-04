@@ -3,15 +3,14 @@
   "name": "food-app-backend",
   "builds": [
     {
-      "src": "src/server.js",
+      "src": "./src/server.js",
       "use": "@vercel/node"
     }
   ],
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "src/server.js",
-      "methods": ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"]
+      "dest": "src/server.js"
     }
     
   ]
