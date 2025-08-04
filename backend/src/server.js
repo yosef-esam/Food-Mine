@@ -1,6 +1,5 @@
 import express from "express";
 import dotenv from "dotenv";
-import path from "path";
 import cors from "cors";
 
 import FoodRouter from "./routers/food.router.js";
@@ -39,7 +38,9 @@ app.use("/api/foods", FoodRouter);
 app.use("/api/users", UserRouter);
 app.use("/api/orders", OrderRouter);
 app.use("/api/upload", uploadRouter);
-
+app.get("/", (req, res) => {
+  res.send("Backend is running.");
+});
 // ✅ Export the Express app for Vercel
 // if (process.env.NODE_ENV !== "production") {
 //   const port = 5000;
