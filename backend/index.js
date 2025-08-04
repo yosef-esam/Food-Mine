@@ -3,11 +3,11 @@ import dotenv from "dotenv";
 import cors from "cors";
 dotenv.config();
 
-import FoodRouter from "./routers/food.router.js";
-import UserRouter from "./routers/user.router.js";
-import { dbconnect } from "./config/database.config.js";
-import OrderRouter from "./routers/order.router.js";
-import uploadRouter from "./routers/upload.router.js";
+import FoodRouter from "./src/routers/food.router.js";
+import UserRouter from "./src/routers/user.router.js";
+import { dbconnect } from "./src/config/database.config.js";
+import OrderRouter from "./src/routers/order.router.js";
+import uploadRouter from "./src/routers/upload.router.js";
 
 dbconnect();
 
@@ -38,10 +38,10 @@ app.get('/', (req, res) => {
   });
 });
 
-app.use("/api/foods", FoodRouter);
-app.use("/api/users", UserRouter);
-app.use("/api/orders", OrderRouter);
-app.use("/api/upload", uploadRouter);
+// app.use("/api/foods", FoodRouter);
+// app.use("/api/users", UserRouter);
+// app.use("/api/orders", OrderRouter);
+// app.use("/api/upload", uploadRouter);
 
 // ✅ Export the Express app for Vercel
 if (process.env.NODE_ENV !== "production") {

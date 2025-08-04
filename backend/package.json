@@ -1,16 +1,15 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "main": "api/index.js",
+  "main": "index.js",
+  "type": "module",
   "engines": {
     "node":"18.x"
   },
-  "type": "module",
   
  "scripts": {
-  "dev": "nodemon src/server.js",
-  "start": "node src/server.js",
-  "vercel-build":"echo"
+  "dev": "nodemon index.js",
+  "start": "node index.js"
 }
 ,
   "keywords": [],
