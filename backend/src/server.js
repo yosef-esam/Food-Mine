@@ -1,6 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
+dotenv.config();
 
 import FoodRouter from "./routers/food.router.js";
 import UserRouter from "./routers/user.router.js";
@@ -8,7 +9,6 @@ import { dbconnect } from "./config/database.config.js";
 import OrderRouter from "./routers/order.router.js";
 import uploadRouter from "./routers/upload.router.js";
 
-dotenv.config();
 dbconnect();
 
 const app = express();
