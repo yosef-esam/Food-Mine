@@ -40,11 +40,11 @@ app.use("/api/orders", OrderRouter);
 app.use("/api/upload", uploadRouter);
 
 // ✅ Export the Express app for Vercel
-if (process.env.NODE_ENV !== "production") {
-  const port = 5000;
-  app.listen(port, () => {
-    console.log(`Server running locally on port ${port}`);
-  });
-}
+// if (process.env.NODE_ENV !== "production") {
+//   const port = 5000;
+//   app.listen(port, () => {
+//     console.log(`Server running locally on port ${port}`);
+//   });
+// }
 
 export default app;
