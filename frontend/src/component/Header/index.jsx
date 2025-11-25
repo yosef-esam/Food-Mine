@@ -15,7 +15,7 @@ function Header() {
           <Link to="/" className="flex items-center gap-3 group">
             <div className="relative">
               <div className="w-20 h-10 bg-gradient-to-br rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow duration-200">
-                <img src="public/icons/logo.png" alt="" className="w-30 h-30"/>
+                <img src="/icons/logo.png" alt="" className="w-30 h-30"/>
               </div>
             </div>
             <div className="flex flex-col">
