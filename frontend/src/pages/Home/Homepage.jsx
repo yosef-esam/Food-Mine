@@ -102,9 +102,9 @@ function Homepage() {
             <div className="relative">
               <div className="relative z-10">
                 <img 
-                  src="/Food/pizza.png" 
+                  src="/icons/logo.png" 
                   alt="Delicious Pizza" 
-                  className="w-full h-auto rounded-2xl shadow-2xl"
+                  className="w-full h-auto rounded-2xl "
                 />
               </div>
               <div className="absolute -top-4 -right-4 w-32 h-32 bg-orange-300 rounded-full opacity-20"></div>
