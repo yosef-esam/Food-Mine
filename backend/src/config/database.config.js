@@ -11,8 +11,6 @@ set("strictQuery", true);
 export const dbconnect = async () => {
   try {
     connect(process.env.MONGO_URL, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
       maxPoolSize: 10,
     });
     await UserSeed();

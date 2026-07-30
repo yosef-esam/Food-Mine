@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Header from "./component/Header";
 import AppRoute from "./AppRoute";
 import Loading from "./component/Loading";
@@ -13,7 +13,7 @@ function App() {
   return (
     <>
       <Header />
-
+      <Loading />
       <AppRoute />
     </>
   );

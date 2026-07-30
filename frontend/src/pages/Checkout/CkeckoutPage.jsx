@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useAuth } from "../../hooks/useAuth";
 import { useCart } from "../../hooks/useCart";
 import { useState } from "react";
@@ -25,7 +25,9 @@ function CheckoutPage() {
     await OrderCheckout({ ...order, name: name, address: address });
     navigate("/payment");
   };
-
+  useEffect(()=>{
+  console.log(order)
+  },[])
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <div className="flex flex-col items-center justify-center min-h-screen p-6">
